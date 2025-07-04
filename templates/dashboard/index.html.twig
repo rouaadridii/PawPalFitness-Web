@@ -1,0 +1,110 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .dashboard-container {
+            margin-right: 100px; /* Adjust the margin-right value as needed */
+        }
+
+        .circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: lightblue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Add additional styles as needed */
+        .user-circle {
+            background-color: lightgreen;
+        }
+
+        .worker-circle {
+            background-color: lightcoral;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<section id="main-content" class=" ">
+        <section class="wrapper main-wrapper" style=''>
+            <div class='col-xl-12 col-lg-12 col-md-12 col-12'>
+    <h1>Welcome to the Dashboard</h1>
+
+    <div class="container dashboard-container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Users</h5>
+                        <div class="circle user-circle">{{ user_count }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Workers</h5>
+                        <div class="circle worker-circle">{{ worker_count }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+        </section>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Total Users', 'Total Workers'],
+                    datasets: [{
+                        label: 'Counts',
+                        data: [{{ user_count }}, {{ worker_count }}],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

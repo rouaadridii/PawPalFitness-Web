@@ -1,0 +1,41 @@
+{% extends 'baseback.html.twig' %}
+
+{% block body %}
+    <div class="chart-window" id="chartWindow">
+        <button class="close-btn" onclick="window.closeChartWindow()">Close</button>
+        <canvas id="chartCanvas"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Function to load chart data and initialize the chart
+        function loadChartData() {
+            fetch('{{ path("chart_data") }}')
+                .then(response => response.json())
+                .then(data => {
+                    const ctx = document.getElementById('chartCanvas').getContext('2d');
+                    const chart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: data.categories,
+                            datasets: [{
+                                label: 'Reservation Category Count',
+                                data: data.counts,
+                                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                });
+        }
+    </script>
+{% endblock %}

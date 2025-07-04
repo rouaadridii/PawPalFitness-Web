@@ -1,0 +1,24 @@
+{% extends 'basePDF.html.twig' %}
+
+{% block title %}Facture Index{% endblock %}
+
+{% block body %}
+<div class="container-fluid contact bg-light py-5">
+    <div class="container py-5">
+        <h1 align="center">Commande</h1>
+        {% for commande in commandes %}
+        <div>
+            <strong>Commande ID:</strong> {{ commande.idc }}<br>
+            <strong>Nom:</strong> {{ commande.nom }}<br>
+            <strong>Prénom:</strong> {{ commande.prenom }}<br>
+            <strong>Email:</strong> {{ commande.email }}<br>
+            <strong>Adresse:</strong> {{ commande.adresse }}<br>
+            <strong>Numéro de Téléphone:</strong> {{ commande.numtelephone }}<br>
+            <strong>Date:</strong> {{ commande.date ? commande.date|date('Y-m-d H:i:s') : '' }}<br>
+            <strong>Total Cost:</strong> {{ commande.totalcost }}<br>
+            <hr>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

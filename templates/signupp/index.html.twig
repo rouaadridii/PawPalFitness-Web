@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="hero-section">
+        <div class="hero-items owl-carousel">
+            <div class="single-hero-item set-bg" data-setbg="{{ asset('img/mainimg.png') }}">
+                <!-- Signup Form -->
+                <div class="signup-form">
+                    <h2>Sign Up</h2>
+
+                    <!-- User Type Selection -->
+                    <div class="user-type-selection">
+                        <p class="user-type-heading">Choose your user type:</p>
+                        <div class="user-type-container">
+                            <div class="user-type-buttons">
+                                <button class="btn btn-primary simple-user-btn" onclick="redirectTo('{{ path('app_signup') }}')">Simple User</button>
+                                <button class="btn btn-primary worker-btn" onclick="redirectTo('{{ path('app_travailleur') }}')">Worker</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Already have an account link -->
+                    <div class="already-account">
+                        <p>Already have an account? <a href="{{ path('app_login') }}">Log in here</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Function to redirect to the specified URL
+        function redirectTo(url) {
+            window.location.href = url;
+        }
+    </script>
+{% endblock %}

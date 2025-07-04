@@ -1,0 +1,177 @@
+{% extends 'baseback.html.twig' %}
+{% block title %}Add a Reservation{% endblock %}
+{% block body %}
+ 
+
+<section id="main-content" class="">
+    <section class="wrapper main-wrapper" style=''>
+    
+        <div class='col-xl-12 col-lg-12 col-md-12 col-12'>
+            <div class="page-title">
+                <div class="float-left">
+                    <h1 class="title">Add a Reservation</h1>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-xl-12 col-lg-12 col-12 col-md-12">
+            <section class="box ">
+                <header class="panel_header">
+                    <h2 class="title float-left">Basic Info</h2>
+                </header>
+                <div class="content-body">
+                    <div class="row">
+                    {{ include('reservation/form.html.twig') }}
+                     
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-2">
+            {{ form_label(form.places, "Places") }}
+        </div>
+        <div class="col-md-10">
+            {{ form_widget(form.places, { 'attr': {'class': 'form-control', 'placeholder': 'Enter number of places','style': 'margin-bottom: 10px;'} }) }}
+            {% if form_errors(form.places) is not empty %}
+                <div class="alert alert-danger">
+                    {{ form_errors(form.places) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-2">
+            {{ form_label(form.category, "Category") }}
+        </div>
+        <div class="col-md-10">
+            {{ form_widget(form.category, { 'attr': {'class': 'form-control', 'placeholder': 'Enter category'} }) }}
+            {% if form_errors(form.category) is not empty %}
+                <div class="alert alert-danger">
+                    {{ form_errors(form.category) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-2">
+            {{ form_label(form.date, "Date") }}
+        </div>
+        <div class="col-md-10">
+            {{ form_widget(form.date, { 'attr': {'class': 'form-control', 'placeholder': 'Enter date'} }) }}
+            {% if form_errors(form.date) is not empty %}
+                <div class="alert alert-danger">
+                    {{ form_errors(form.date) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Repeat the above structure for other fields -->
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-2">
+            {{ form_label(form.startTime, "Start Time") }}
+        </div>
+        <div class="col-md-10">
+            {{ form_widget(form.startTime, { 'attr': {'class': 'form-control', 'placeholder': 'Enter start time'} }) }}
+            {% if form_errors(form.startTime) is not empty %}
+                <div class="alert alert-danger">
+                    {{ form_errors(form.startTime) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-2">
+            {{ form_label(form.endTime, "End Time") }}
+        </div>
+        <div class="col-md-10">
+            {{ form_widget(form.endTime, { 'attr': {'class': 'form-control', 'placeholder': 'Enter end time'} }) }}
+            {% if form_errors(form.endTime) is not empty %}
+                <div class="alert alert-danger">
+                    {{ form_errors(form.endTime) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-2">
+            {{ form_label(form.status, "Status") }}
+        </div>
+        <div class="col-md-10">
+            {{ form_widget(form.status, { 'attr': {'class': 'form-control', 'placeholder': 'Enter status'} }) }}
+            {% if form_errors(form.status) is not empty %}
+                <div class="alert alert-danger">
+                    {{ form_errors(form.status) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-2">
+            {{ form_label(form.duration, "Duration") }}
+        </div>
+        <div class="col-md-10">
+            {{ form_widget(form.duration, { 'attr': {'class': 'form-control', 'placeholder': 'Enter status'} }) }}
+            {% if form_errors(form.duration) is not empty %}
+                <div class="alert alert-danger">
+                    {{ form_errors(form.duration) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-2">
+            {{ form_label(form.pricing, "Pricing") }}
+        </div>
+        <div class="col-md-10">
+            {{ form_widget(form.pricing, { 'attr': {'class': 'form-control', 'placeholder': 'Enter status'} }) }}
+            {% if form_errors(form.pricing) is not empty %}
+                <div class="alert alert-danger">
+                    {{ form_errors(form.pricing) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Repeat the above structure for other fields -->
+
+<div class="form-button mt-3">
+    {{ form_widget(form.Add, { 'attr': {'class': 'btn btn-primary btn-lg btn-block'} }) }}
+</div>
+<div class="form-button mt-3">
+<a href="{{ path('app_display') }}">back to list</a>
+</div>
+
+
+{{ form_end(form) }}
+                        
+                    </div>
+                </div>
+            </section>
+        </div>
+       
+
+    </section>
+</section>
+{% endblock %}

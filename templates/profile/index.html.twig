@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Activitar Template">
+    <meta name="keywords" content="Activitar, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} PAWPAL Fitness {% endblock %} </title>
+
+    {% block stylesheets %}
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/elegant-icons.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/nice-select.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/slicknav.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}" type="text/css">
+    {% endblock %}
+
+</head>
+
+<body>
+
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+    <header class="header-section">
+        <div class="container-fluid" >
+            <div class="logo" style="color:#377fa7;font-weight: bold;font-size: larger;">
+                    PAWPAL FITNESS
+            </div>
+            <div class="top-social">
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-youtube-play"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+<a href="#" id="showProfile" data-user-id="{{ user.id }}"><i class="fa fa-facebook"></i> Show Profile</a>
+<a href="{{ path('app_login') }}"><i class="fa fa-sign-out"></i> Logout</a>
+
+
+<div id="profileSection" style="display: none;">
+  <section class="vh-100 d-flex align-items-center justify-content-center" style="background-color: #eee;">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body text-center">
+              <div class="mt-3 mb-4">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
+                  class="rounded-circle img-fluid" style="width: 100px;" alt="Profile Picture" />
+              </div>
+              <h4 class="mb-2" id="profileName">Hello {{ user.nom }}</h4>
+              <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-rounded btn-lg" onclick="window.location.href='{{ path('app_update_profile', {'id': user.id}) }}'">
+                Update Profile
+              </button>
+              <button type="button" class="btn btn-secondary btn-rounded btn-lg mt-3" onclick="window.location.href='{{ path('app_update_password', {'id': user.id}) }}'">
+                Update Password
+              </button>
+         <form method="POST" action="{{ path('app_delete_account', {'id': user.id}) }}" onsubmit="return confirm('Are you sure you want to delete your account?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete_account') }}">
+    <button type="submit" class="btn btn-danger">Delete Account</button>
+</form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  document.getElementById('showProfile').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default link behavior
+
+    var profileSection = document.getElementById('profileSection');
+    profileSection.style.display = profileSection.style.display === 'none' ? 'block' : 'none';
+  });
+
+  function confirmDelete() {
+    if (confirm('Are you sure you want to delete your account?')) {
+      // Redirect to the delete account route
+      window.location.href = '{{ path('app_delete_account', {'id': user.id}) }}';
+    }
+  }
+</script>
+
+
+
+
+            </div>
+            <div class="container">
+                <div class="nav-menu">
+                    <nav class="mainmenu mobile-menu">
+                        <ul>
+                            <li><a href="/profile/{{ user.id }}">Home</a></li>
+                            <li><a href="/en">Gyms</a></li>
+                            <li><a href="#">Trainers</a></li>
+                            <li><a href="#">Products</a></li>
+                            <li><a href="/afficher">Animals</a></li>
+                            <li><a href="/planning">Planning</a></li>
+                            <li><a href="#">About us</a>
+                                <ul class="dropdown">
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="#">Our Team</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+            <div class="single-hero-item set-bg" data-setbg="{{asset('img/fitness&sport.jpg')}}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="hero-text">
+                                <h2>Join Us Now</h2>
+                                <h1>FITNESS & SPORT</h1>
+                                <a href="/signupp" class="primary-btn">Sign UP</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-hero-item set-bg" data-setbg="{{asset('img/furfeather.jpg')}}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="hero-text">
+                                <h2>Join Us Now</h2>
+                                <h1>Fur & Feather Fitness Fiesta</h1>
+                                <a href="/signupp" class="primary-btn">Sign UP</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero End -->
+
+    <!-- Feature Section Begin -->
+    <section class="feature-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-item set-bg" data-setbg="{{asset('img/feature/feature-1.jpg')}}">
+                        <h3>Gym Subscriptions</h3>
+                        <p>Reduce the risk of chronic diseases and boost overall lifespan<br />Get fit. Get strong. Get started today!</p>
+                        <a href="#" class="primary-btn f-btn">More</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-item set-bg" data-setbg="{{asset('img/Trainning.png')}}">
+                        <h3>TRAINING</h3>
+                        <p>Paws and Push-Ups: Connecting champions<br /> whether two-legged or four!</p>
+                        <a href="#" class="primary-btn f-btn">More</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-item set-bg" data-setbg="{{asset('img/feature/feature-3.jpg')}}">
+                        <h3>Sports Nutrition</h3>
+                        <p>Nutrition Made Simple: Unlock your body's potential <br /> with expert guidance tailored just for you.</p>
+                        <a href="#" class="primary-btn f-btn">More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Feature Section End -->
+
+   
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="classes-item set-bg" data-setbg="{{asset('img/produit1.png')}}">
+                        <h4>Pack de Prise de masse musculaire<h4>
+                        <p>443.52 DT</p>
+                        <a href="#" class="primary-btn class-btn">Buy Now</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="classes-item set-bg" data-setbg="{{asset('img/produit2.png')}}">
+                        <h4>LIGHT DIGEST WHEY Protéine 500g</h4>
+                        <p>78.84 DT</p>
+                        <a href="#" class="primary-btn class-btn">Buy Now</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="classes-item set-bg" data-setbg="{{asset('img/produit3.png')}}">
+                        <h4>SERIOUS MASS 5443g , Chocolate</h4>
+                        <p>359.64 DT</p>
+                        <a href="#" class="primary-btn class-btn">Buy Now</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="classes-item set-bg" data-setbg="{{asset('img/produit4.png')}}">
+                        <h4>TRUE MASS 1200 4.73 kg , Vanilla</h4>
+                        <p>341.64 DT</p>
+                        <a href="#" class="primary-btn class-btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Classes Section End -->
+
+
+    <!-- Footer Section Begin -->
+<footer class="footer-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="footer-logo-item">
+                    <div class="f-logo">
+                        <a href="#"><img src="{{asset('img/logoppf.png')}}" alt="logoppf" style="height:100px;"></a>
+                    </div>
+                    <p>Engaging in sports not only enhances physical and mental well-being in humans but also brings a lively zest to the lives of our animal companions.</p>
+                    <div class="social-links">
+                        <h6>Follow us</h6>
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-youtube-play"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 offset-lg-1">
+                <div class="footer-widget">
+                    <h5>About Us</h5>
+                    <div class="footer-blog">
+                        <a href="#" class="fb-item">
+                            <h6>our team</h6>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="footer-widget">
+                    <h5>Program</h5>
+                    <ul class="workout-program">
+                        <li><a href="#">Bodybuilding</a></li>
+                        <li><a href="#">Running</a></li>
+                        <li><a href="#">Streching</a></li>
+                        <li><a href="#">Weight Loss</a></li>
+                        <li><a href="#">Gym Fitness</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="footer-widget">
+                    <h5>Get Info</h5>
+                    <ul class="footer-info">
+                        <li>
+                            <i class="fa fa-phone"></i>
+                            <span>Phone:</span>
+                            (216) 71555555
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope-o"></i>
+                            <span>Email:</span>
+                            PawPal@gmail.com
+                        </li>
+                        <li>
+                            <i class="fa fa-map-marker"></i>
+                            <span>Address</span>
+                            Technological Pole, 2 André Ampère Street, Ariana 2083, Tunisia
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <!-- Copyright notice here -->
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+
+    {% block javascripts %} 
+    <!-- Js Plugins -->
+    <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('js/mixitup.min.js')}}"></script>
+    <script src="{{asset('js/jquery.nice-select.min.js')}}"></script>
+    <script src="{{asset('js/jquery.slicknav.js')}}"></script>
+    <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('js/masonry.pkgd.min.js')}}"></script>
+    <script src="{{asset('js/main.js')}}"></script>
+    {% endblock %}
+</body>
+
+</html>

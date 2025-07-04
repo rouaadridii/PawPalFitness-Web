@@ -1,0 +1,273 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<br><br>
+    <div class="form-body">
+        <div class="row">
+            <div class="form-holder" style="margin-left:27%;">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h3>Add Your Pet Today</h3>
+                        <br>
+                        
+                        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+                        {% if app.session.flashbag.has('error') %}
+                            {% set errorMessages = app.session.flashbag.get('error') %}
+                                {% for errorMessage in errorMessages %}
+                                    <div class="alert alert-danger">{{ errorMessage }}</div>
+                                {% endfor %}
+                        {% endif %}
+
+                            <div class="col-md-12">
+                               <div class="row">
+                                  <div class="col-md-2">
+                                    {{ form_label(form.nom, "Name") }}
+                                  </div>
+                                  <div class="col-md-10">
+                                    {{ form_widget(form.nom, { 'attr': {'class': 'form-control', 'placeholder': 'Enter your pet\'s name','style': 'margin-bottom: 10px;'} }) }}
+                                    {% if form_errors(form.nom) is not empty %}
+                                    <div class="alert alert-danger">
+                                    {{ form_errors(form.nom) }}
+                                    </div>
+                                    {% endif %}
+                                  </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="row">
+                                   <div class="col-md-2">
+                                    {{ form_label(form.age,"Age") }}
+                                   </div>
+                                   <div class="col-md-10">
+                                    {{ form_widget(form.age,{ 'attr': {'class': 'form-control', 'placeholder': 'Enter your pet\'s  age', 'style': 'background-color: #FBEEE6;'} }) }} 
+                                    {% if form_errors(form.age) is not empty %}
+                                    <div class="alert alert-danger">
+                                   {{ form_errors(form.age) }}
+                                   </div>
+                                   {% endif %}
+                                   </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="row">
+                                   <div class="col-md-2">
+                                     {{ form_label(form.poids,"Weight") }}
+                                    </div>
+                                    <div class="col-md-10">
+                                      {{ form_widget(form.poids,{ 'attr': {'class': 'form-control', 'placeholder': 'Enter your pet\'s  weight'} }) }}
+                                      {% if form_errors(form.poids) is not empty %}
+                                    <div class="alert alert-danger">
+                                   {{ form_errors(form.poids) }}
+                                  </div>
+                                    {% endif %}
+                                  </div>
+                                </div> 
+                            </div>
+
+                           <div class="col-md-12">
+                              <div class="row">
+                                <div class="col-md-2">
+                                  {{ form_label(form.type,"Type") }}
+                                </div>
+                                <div class="col-md-10">
+                                  {{ form_widget(form.type,{'attr':{'placeholder': 'Enter your pet\'s  type'}}) }}
+                                  {% if form_errors(form.type) is not empty %}
+                                 <div class="alert alert-danger">
+                                 {{ form_errors(form.type) }}
+                                </div>
+                                {% endif %}
+                                </div>
+                              </div>
+                           </div>
+
+                           <div class="col-md-12 mt-3">
+    <div class="row">
+        <div class="col-md-2">
+            {{ form_label(form.idc, "Categorie") }}
+        </div>
+        <div class="col-md-10">
+            {{ form_widget(form.idc, {'attr': {'class': 'form-control'}}) }} 
+        </div>
+    </div>
+</div>
+<div class="col-md-12 mt-3">
+    <div class="row">
+        <div class="col-md-2">
+            {{ form_label(form.idu, "Personne") }}
+        </div>
+        <div class="col-md-10">
+            {{ form_widget(form.idu, {'attr': {'class': 'form-control'}}) }} 
+            {% if form_errors(form.idu) is not empty %}
+                <div class="alert alert-danger">
+                    {{ form_errors(form.idu) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+                            <div class="col-md-12">
+                                {{ form_label(form.details,"Details") }}
+                                {{ form_widget(form.details,{ 'attr': {'class': 'form-control', 'placeholder': 'Enter your pet\'s details', 'style': 'background-color: #FBEEE6;'} }) }} 
+                               {% if form_errors(form.details) is not empty %}
+                               <div class="alert alert-danger">
+                                {{ form_errors(form.details) }}
+                               </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="col-md-12">
+                            <input type="tel" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="Enter your phone number" value="{{ phoneNumber|default('+216') }}">
+                            </div>
+
+                            <div class="form-button mt-3">
+                              {{ form_widget(form.Add, { 'attr': {'class': 'btn btn-primary btn-lg btn-block'} }) }}
+                            </div>
+                        
+                        {{form_end(form)}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<style>
+html, body {
+    height: 100%;
+}
+
+
+.form-holder {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 100vh;
+}
+
+.form-holder .form-content {
+    position: relative;
+    text-align: center;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    padding: 60px;
+}
+
+.form-content .form-items {
+    border: 3px solid #e16521;
+    padding: 40px;
+    display: inline-block;
+    width: 100%;
+    min-width: 540px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    text-align: left;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.form-content h3 {
+    color: black;
+    text-align: left;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.form-content h3.form-title {
+    margin-bottom: 30px;
+}
+
+.form-content p {
+    color: black;
+    text-align: left;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 20px;
+    margin-bottom: 30px;
+}
+
+
+.form-content label, .was-validated .form-check-input:invalid~.form-check-label, .was-validated .form-check-input:valid~.form-check-label{
+    color: black;
+}
+
+.form-content input[type=text], .form-content input[type=password], .form-content input[type=email], .form-content select {
+    width: 100%;
+    padding: 9px 20px;
+    text-align: left;
+    border: 0;
+    outline: 0;
+    border-radius: 6px;
+    background-color: #FBEEE6;
+    font-size: 15px;
+    font-weight: 300;
+    color: #8D8D8D;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    margin-top: 16px;
+}
+
+
+.btn-primary{
+    background:linear-gradient(to right,#EEA567, #e16521, #FFA14F); #2C2754;
+    outline: none;
+    border: 0px;
+     box-shadow: none;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active{
+    background: #2C2754;
+    outline: none !important;
+    border: none !important;
+     box-shadow: none;
+}
+
+.form-content textarea {
+    position: static !important;
+    width: 100%;
+    padding: 8px 20px;
+    border-radius: 6px;
+    text-align: left;
+    background-color: #fff;
+    border: 0;
+    font-size: 15px;
+    font-weight: 300;
+    color: black;
+    outline: none;
+    resize: none;
+    height: 120px;
+    -webkit-transition: none;
+    transition: none;
+    margin-bottom: 14px;
+}
+
+.form-content textarea:hover, .form-content textarea:focus {
+    border: 0;
+    background-color: #ebeff8;
+    color: #8D8D8D;
+}
+
+.invalid-feedback{
+    color: #ff606e;
+}
+
+.valid-feedback{
+   color: #2acc80;
+}
+
+</style>
+
+{% endblock %}

@@ -1,0 +1,228 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block body %}
+<br><br><br>
+<br></br>
+
+<div class="container">
+    <h2>Checkout</h2>
+    <form id="payment-form">
+        <!-- Billing Address -->
+        <div class="row">
+            <div class="col-50">
+                <h3>Billing Address</h3>
+                <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+                <input type="text" id="fname" name="firstname" placeholder="John M. Doe" required>
+                <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                <input type="text" id="email" name="email" placeholder="john@example.com" required>
+                <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+                <input type="text" id="adr" name="address" placeholder="542 W. 15th Street" required>
+                <label for="city"><i class="fa fa-institution"></i> City</label>
+                <input type="text" id="city" name="city" placeholder="New York" required>
+                
+                <div class="row">
+                    <div class="col-50">
+                        <label for="state">State</label>
+                        <input type="text" id="state" name="state" placeholder="NY" required>
+                    </div>
+                    <div class="col-50">
+                        <label for="zip">Zip</label>
+                        <input type="text" id="zip" name="zip" placeholder="10001" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Information -->
+            <div class="col-50">
+                <h3>Payment</h3>
+                <!-- Create an instance of the card element -->
+                <div id="card-element"></div>
+                <!-- Error message container -->
+                <div id="card-errors" role="alert"></div>
+                <!-- Submit button -->
+                <input type="submit" value="Continue to checkout" class="btn">
+            </div>
+        </div>
+    </form>
+
+    <!-- Cart Summary -->
+    <div class="col-25">
+        <div class="container">
+            <h4>Cart
+                <span class="price" style="color:black">
+                    <i class="fa fa-shopping-cart"></i>
+                    <b>{{ cart_count }}</b> <!-- Ensure `cart_count` is passed from the controller -->
+                </span>
+            </h4>
+            {% for item in cart_items %}
+                <p><a href="#">{{ item.name }}</a> <span class="price">${{ item.price }}</span></p>
+            {% endfor %}
+            <hr>
+            <p>Total <span class="price" style="color:black"><b>${{ total_price }}</b></span></p>
+        </div>
+    </div>
+</div>
+
+<!-- Include CSS -->
+<style>
+    /* Add your CSS styling here */
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -16px;
+    }
+
+    .col-25 {
+        flex: 25%;
+        padding: 0 16px;
+    }
+
+    .col-50 {
+        flex: 50%;
+        padding: 0 16px;
+    }
+
+    input[type=text] {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    label {
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .btn {
+        background-color: #04AA6D;
+        color: white;
+        padding: 12px;
+        margin: 10px 0;
+        border: none;
+        width: 100%;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 17px;
+    }
+
+    .btn:hover {
+        background-color: #45a049;
+    }
+
+    span.price {
+        float: right;
+        color: grey;
+    }
+
+    /* Responsive layout */
+    @media (max-width: 800px) {
+        .row {
+            flex-direction: column-reverse;
+        }
+        .col-25 {
+            margin-bottom: 20px;
+        }
+    }
+</style>
+
+<!-- Include Stripe.js -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+    // Initialize Stripe
+    const stripe = Stripe('{{ stripe_public_key }}');
+    const elements = stripe.elements();
+
+    // Create an instance of the card element
+    const cardElement = elements.create('card', {
+        style: {
+            base: {
+                color: '#32325d',
+                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                fontSmoothing: 'antialiased',
+                fontSize: '16px',
+                '::placeholder': {
+                    color: '#aab7c4'
+                }
+            },
+            invalid: {
+                color: '#fa755a',
+                iconColor: '#fa755a'
+            }
+        },
+        hidePostalCode: false // Keep postal code field
+    });
+
+    // Mount the card element to the DOM
+    cardElement.mount('#card-element');
+
+    // Handle form submission
+    const form = document.getElementById('payment-form');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Create a PaymentMethod using the card element
+        stripe.createPaymentMethod('card', cardElement).then(function(result) {
+            if (result.error) {
+                // Display error message
+                const errorElement = document.getElementById('card-errors');
+                errorElement.textContent = result.error.message;
+            } else {
+                // Send the PaymentMethod ID to the server for payment processing
+                processPayment(result.paymentMethod.id);
+            }
+        });
+    });
+
+    // Function to process payment using the PaymentMethod ID
+    // Function to process payment using the PaymentMethod ID
+function processPayment(paymentMethodId) {
+    fetch('{{ path('process_payment') }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': '{{ csrf_token('process_payment') }}'
+        },
+        body: JSON.stringify({
+            payment_method_id: paymentMethodId,
+            amount: {{ total_price }} // Specify the amount directly since it's an integer
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Payment successful, check if additional action is needed
+            if (data.paymentIntent && data.paymentIntent.status === 'requires_action') {
+                stripe.handleCardPayment(data.paymentIntent.client_secret).then(function(result) {
+                    if (result.error) {
+                        // Handle authentication error
+                        const errorElement = document.getElementById('card-errors');
+                        errorElement.textContent = result.error.message;
+                    } else {
+                        // Redirect to the success page
+                        window.location.href = '{{ path('payment_success') }}';
+                    }
+                });
+            } else {
+                // Redirect to the success page
+                window.location.href = '{{ path('payment_success') }}';
+            }
+        } else {
+            // Payment failed, display error message
+            const errorElement = document.getElementById('card-errors');
+            errorElement.textContent = 'Payment failed. Please try again.';
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+</script>
+
+
+{% endblock %}

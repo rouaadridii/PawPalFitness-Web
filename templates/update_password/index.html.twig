@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Activitar Template">
+    <meta name="keywords" content="Activitar, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} PAWPAL Fitness {% endblock %} </title>
+
+    {% block stylesheets %}
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/elegant-icons.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/nice-select.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/slicknav.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}" type="text/css">
+    {% endblock %}
+
+    <style>
+        body {
+            margin-top: 90px; /* Adjust the margin to ensure content is below the header */
+            margin-bottom: 80px; /* Adjust the margin to ensure content is above the footer */
+        }
+
+        h1 {
+            font-size: 24px; /* Adjust the font size of the h1 */
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+    <header class="header-section" style="background-color: #151515;height:90px;">
+        <div class="container-fluid">
+            <div class="logo">
+                <a href="/profile/{{ user.id }}">
+                    <img src="{{ asset('img/logoppf.png') }}" alt="PPF" style="height: 50px;">
+                </a>
+            </div>
+            <div class="top-social">
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-youtube-play"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+            </div>
+            <div class="container">
+                <div class="nav-menu">
+                    <nav class="mainmenu mobile-menu">
+                        <ul>
+                            <li><a href="/profile/{{ user.id }}">Home</a></li>
+                            <li><a href="">Gyms</a></li>
+                            <li><a href="">Trainers</a></li>
+                            <li><a href="">Animals</a></li>
+                            <li><a href="">Products</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Update Password Section -->
+     <div class="container mt-5">
+        <h1>Update Password</h1>
+        <hr>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Change Password</h5>
+                        <!-- Display error message if there are any -->
+                        {% for message in app.flashes('error') %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        <form method="post" action="{{ path('app_update_password', {'id': user.id}) }}">
+                            <div class="form-group">
+                                <label for="current-password">Current Password:</label>
+                                <input type="password" class="form-control" id="current-password" name="current-password">
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password">New Password:</label>
+                                <input type="password" class="form-control" id="new-password" name="new-password">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirm New Password:</label>
+                                <input type="password" class="form-control" id="confirm-password" name="confirm-password">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Section Begin -->
+    <footer class="footer-section">
+        <!-- Footer content -->
+    </footer>
+    <!-- Footer Section End -->
+
+    {% block javascripts %} 
+    <!-- Js Plugins -->
+    <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('js/mixitup.min.js')}}"></script>
+    <script src="{{asset('js/jquery.nice-select.min.js')}}"></script>
+    <script src="{{asset('js/jquery.slicknav.js')}}"></script>
+    <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('js/masonry.pkgd.min.js')}}"></script>
+    <script src="{{asset('js/main.js')}}"></script>
+    {% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,4 @@
+framework:
+    mailer:
+        dsn: 'gmail+smtp://missaouimolka44@gmail.com:11431037@default'
+        message_bus:  false

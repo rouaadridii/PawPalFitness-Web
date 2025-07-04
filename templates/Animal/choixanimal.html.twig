@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Activitar Template">
+    <meta name="keywords" content="Activitar, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} PAWPAL Fitness {% endblock %} </title>
+
+    {% block stylesheets %}
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/elegant-icons.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/nice-select.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/slicknav.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}" type="text/css">
+    {% endblock %}
+    
+
+</head>
+
+<body>
+<style>
+.red-heart {
+    color: red; 
+}
+.form{
+
+    position: relative;
+}
+
+.form .fa-search{
+
+    position: absolute;
+    top:20px;
+    left: 20px;
+    color: #9ca3af;
+
+}
+
+.form span{
+
+        position: absolute;
+    right: 17px;
+    top: 13px;
+    padding: 2px;
+    border-left: 1px solid #d1d5db;
+
+}
+
+.left-pan{
+    padding-left: 7px;
+}
+
+.left-pan i{
+   
+   padding-left: 10px;
+}
+
+.form-input{
+
+    height: 55px;
+    text-indent: 33px;
+    border-radius: 10px;
+}
+
+.form-input:focus{
+
+    box-shadow: none;
+    border:none;
+}
+</style>
+
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+    <header class="header-section" style="background-color: #151515;height:90px;">
+        <div class="container-fluid" >
+            <div class="logo" >
+                <a href="">
+                    <img src="{{asset('img/logoppf.png')}}" alt="PPF" style="height:50px;">
+                </a>
+            </div>
+            <div class="top-social">
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-youtube-play"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+            </div>
+            <div class="container">
+                <div class="nav-menu">
+                    <nav class="mainmenu mobile-menu">
+                        <ul>
+                            <li><a href="{{ path('app_pagevitrine') }}">Home</a></li>
+                            <li><a href="">Gyms</a></li>
+                            <li><a href="">Trainers</a></li>
+                            <li><a href="{{ path('app_choixanimal') }}">Animals</a></li>
+                            <li><a href="">Products</a></li>
+                            <li><a href="">About us</a>
+                                <ul class="dropdown">
+                                    <li><a href="{{ path('app_aboutus') }}">About Us</a></li>
+                                    <li><a href="{{ path('app_team') }}">Our Team</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+<!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg spad" data-setbg="{{asset('img/animaux.png')}}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h2 style="color:#17A589;">My Animals</h2>
+                        <div class="breadcrumb-controls">
+                            <a href="{{ path('app_pagevitrine') }}" style="color:#f44336;"><i class="fa fa-home" style="color:#f44336;"></i> Home</a>
+                            <span >Animals</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb End -->
+
+
+    <section class="gallery-section spad">
+         <div class="container">
+                <div class="container" >
+                {% if app.session.flashbag.has('error') %}
+                            {% set errorMessages = app.session.flashbag.get('error') %}
+                                {% for errorMessage in errorMessages %}
+                                    <div class="alert alert-danger">{{ errorMessage }}</div>
+                                {% endfor %}
+                        {% endif %}
+                    <div class="row height d-flex justify-content-center align-items-center">
+    <div class="col-md-6">
+        <form action="{{ path('animal_search') }}" method="get" class="form">
+    <i class="fa fa-search"></i>
+    <input type="text" name="search_term" id="transcription_result" class="form-control form-input" placeholder="Search Your Pet...">
+    <span>
+        <button type="button" id="startRecordingButton" class="btn"><i class="fa fa-microphone"></i></button>
+    </span>
+    <span>
+        <button type="submit" class="btn" style="margin-right:30px;">Search</button>
+    </span>
+</form>
+ 
+    </div>
+</div>
+                </div>
+         <br><a href="{{ path('app_affformajout') }}" class="primary-btn class-btn"  onmouseover="this.style.color='#e16521';" onmouseout="this.style.color='white';">Add Your Pet</a>
+          <div class="row">
+              <div class="col-lg-12">
+                    <div class="gallery-controls">
+                        <ul>
+                            <li class="active" data-filter="*">All </li>
+                            <li data-filter=".cats">Cats</li>
+                            <li data-filter=".dogs">Dogs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row gallery-filter">
+    <!-- Display animals with red heart icon first -->
+{% for a in animal %}
+    {% set isFavorite = false %}
+    {% for a2 in fav %}
+        {% if a.nom == a2.noma %}
+            {% set isFavorite = true %}
+        {% endif %}
+    {% endfor %}
+    
+    {% set isCat = false %}
+    {% for category in categories %}
+        {% if a.idc == category %}
+            {% if category.nomc == 'Chat' %}
+                {% set isCat = true %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    
+    {% if isFavorite %}
+        <div class="col-lg-4 col-sm-6 mix {{ isCat ? 'cats' : 'dogs' }}">
+            <div class="gallery-item">
+              <div class="image-container" style="position: relative;">
+              <i class="fa fa-map-pin" style="color:red; position: absolute; top: 5px; left: 20px; font-size: 20px; margin-top: 5px;"></i>
+              <img src="{{ asset(isCat ? 'img/cat.jpg' : 'img/dog.jpg') }}" alt="">
+            </div>
+
+                 
+                <div class="gi-hover-warp">
+                    <div class="gi-hover">
+                       
+                        <a href="{{ path('app_details', {nom: a.nom}) }}" ><i class="fa fa-search-plus"></i></a>
+                        <a href="#" class="delete-link" data-nom="{{ a.nom }}" title="Delete"><i class="fa fa-close"></i></a>
+                        <a href="{{ path('animal_favoris', {nom: a.nom}) }}"><i class="fa fa-heart red-heart"></i></a>
+                        <h6>{{ a.nom }}<span>{{ a.type }}</span></h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+
+<!-- Display all other animals -->
+{% for a in animal %}
+    {% set isFavorite = false %}
+    {% for a2 in fav %}
+        {% if a.nom == a2.noma %}
+            {% set isFavorite = true %}
+        {% endif %}
+    {% endfor %}
+    
+    {% set isCat = false %}
+    {% for category in categories %}
+        {% if a.idc == category %}
+            {% if category.nomc == 'Chat' %}
+                {% set isCat = true %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    
+    {% if not isFavorite %}
+        <div class="col-lg-4 col-sm-6 mix {{ isCat ? 'cats' : 'dogs' }}">
+            <div class="gallery-item">
+                <img src="{{ asset(isCat ? 'img/cat.jpg' : 'img/dog.jpg') }}" alt="">
+                <div class="gi-hover-warp">
+                    <div class="gi-hover">
+                        <a href="{{ path('app_details', {nom: a.nom}) }}" ><i class="fa fa-search-plus"></i></a>
+                        <a href="#" class="delete-link" data-nom="{{ a.nom }}" title="Delete"><i class="fa fa-close"></i></a>
+                        <a href="{{ path('animal_favoris', {nom: a.nom}) }}"><i class="fa fa-heart{{ isFavorite ? ' red-heart' : '' }}"></i></a>
+                        <h6>{{ a.nom }}<span>{{ a.type }}</span></h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+
+</div>
+
+    </section>
+
+    <!-- Footer Section Begin -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="footer-logo-item">
+                        <div class="f-logo">
+                            <a href="#"><img src="{{asset('img/logoppf.png')}}" alt="logoppf" style="height:150px;"></a>
+                        </div>
+                        <p>Engaging in sports not only enhances physical and mental well-being in humans but also brings a lively zest to the lives of our animal companions.</p>
+                        <div class="social-links">
+                            <h6>Follow us</h6>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 offset-lg-1">
+                    <div class="footer-widget">
+                        <h5>About Us</h5>
+                        <div class="footer-blog">
+                            <a href="#" class="fb-item">
+                                <h6>our team</h6>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="footer-widget">
+                        <h5>Program</h5>
+                        <ul class="workout-program">
+                            <li><a href="#">Bodybuilding</a></li>
+                            <li><a href="#">Running</a></li>
+                            <li><a href="#">Streching</a></li>
+                            <li><a href="#">Weight Loss</a></li>
+                            <li><a href="#">Gym Fitness</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="footer-widget">
+                        <h5>Get Info</h5>
+                        <ul class="footer-info">
+                            <li>
+                                <i class="fa fa-phone"></i>
+                                <span>Phone:</span>
+                                (216) 71555555
+                            </li>
+                            <li>
+                                <i class="fa fa-envelope-o"></i>
+                                <span>Email:</span>
+                                PawPal@gmail.com
+                            </li>
+                            <li>
+                                <i class="fa fa-map-marker"></i>
+                                <span>Address</span>
+                                Technological Pole, 2 André Ampère Street, Ariana 2083, Tunisia
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-text">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="ct-inside">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by Fantastic five and inspired of <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+    {% block javascripts %} 
+    <!-- Js Plugins -->
+    <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('js/mixitup.min.js')}}"></script>
+    <script src="{{asset('js/jquery.nice-select.min.js')}}"></script>
+    <script src="{{asset('js/jquery.slicknav.js')}}"></script>
+    <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('js/masonry.pkgd.min.js')}}"></script>
+    <script src="{{asset('js/main.js')}}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    let recorder; // Define recorder variable outside the function to access it from different functions
+    let audioChunks = []; // Store audio chunks
+
+    async function startRecording(stream) {
+        try {
+            const options = {
+                mimeType: 'audio/webm',
+                audioBitsPerSecond: 128000
+            };
+
+            recorder = new MediaRecorder(stream, options); // Assign recorder to the global variable
+
+            recorder.ondataavailable = event => {
+                audioChunks.push(event.data); // Push audio data to the chunks array
+            };
+
+            recorder.onstop = async () => {
+                console.log('Recording stopped.');
+
+                const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+
+                const formData = new FormData();
+                formData.append('audio', audioBlob);
+
+                try {
+                    const response = await fetch('http://localhost:8080/transcriber.php', { // Replace 'yourdomain.com' with your actual domain
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const transcription = await response.text();
+                    console.log('Transcription:', transcription);
+
+                    // Handle the transcription result here
+                    document.getElementById('transcription_result').textContent = transcription;
+
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            };
+
+            recorder.start();
+            console.log('Recording...');
+        } catch (error) {
+            console.error('Error starting recording:', error);
+        }
+    }
+
+    // Function to stop recording
+    function stopRecording() {
+        if (recorder && recorder.state !== 'inactive') {
+            recorder.stop();
+        }
+    }
+
+    // Event listener for the stop button
+    document.getElementById('stopRecordingButton').addEventListener('click', stopRecording);
+
+    // Event listener for the start button
+    document.getElementById('startRecordingButton').addEventListener('click', async () => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            startRecording(stream);
+        } catch (error) {
+            console.error('Error accessing microphone:', error);
+        }
+    });
+});
+
+
+    </script>
+
+
+    <script>
+        $(document).ready(function() {
+            // Function to open the pop-up
+            $('.delete-link').click(function() {
+                $('#categoryPopup').fadeIn();
+            });
+
+            // Function to close the pop-up
+            $('#categoryPopup').on('click', function(event) {
+                if ($(event.target).is('#categoryPopup')) {
+                    $(this).fadeOut();
+                }
+            });
+
+            // Function to show delete confirmation popup
+            function showDeleteConfirmation(nom) {
+                var confirmation = confirm("Are you sure you want to delete your pet '" + nom + "'?");
+                if (confirmation) {
+                    // Perform delete action
+                    window.location.href = "{{ path('animal_del', {'nom': '___'}) }}".replace('___', nom);
+                }
+            }
+
+            // Event listener for delete link clicks
+            $(document).on('click', '.delete-link', function(event) {
+                event.preventDefault(); // Prevent the default link behavior
+                var nom = $(this).data('nom');
+                showDeleteConfirmation(nom); // Call the function to show the confirmation popup
+            });
+        });
+</script>
+
+    {% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,222 @@
+{% extends 'baseback.html.twig' %}
+
+{% block body %}
+    <section id="main-content" class=" ">
+        <section class="wrapper main-wrapper" style=''>
+            <div class='col-xl-12 col-lg-12 col-md-12 col-12'>
+
+                <div class="page-title">
+                    <div class="float-left">
+                        <h1 class="title">Add Pets Category</h1>                            
+                    </div>
+
+                    <div class="float-right d-none">
+                        <ol class="breadcrumb">
+                            <li>
+                                <a href=""><i class="fa fa-home"></i>Home</a>
+                            </li>
+                            <li>
+                                <a href="blo-categories.html">Categories</a>
+                            </li>
+                            <li class="active">
+                                <strong>Add Category</strong>
+                            </li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix">
+            </div>
+                <div class="col-xl-12 col-lg-12 col-12 col-md-12">
+                     <section class="box ">
+
+                            <header class="panel_header">
+                                <h2 class="title float-left">Infos</h2>
+                                <div class="actions panel_actions float-right">
+                                    <i class="box_toggle fa fa-chevron-down"></i>
+                                    <i class="box_setting fa fa-cog" data-toggle="modal" href="#section-settings"></i>
+                                    <i class="box_close fa fa-times"></i>
+                                </div>
+                            </header>
+
+                            <div class="content-body">
+                                <div class="row">
+
+                                    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                                    {% if app.session.flashbag.has('error') %}
+                                    {% set errorMessages = app.session.flashbag.get('error') %}
+                                    {% for errorMessage in errorMessages %}
+                                      <div class="alert alert-danger">{{ errorMessage }}</div>
+                                    {% endfor %}
+                                    {% endif %}
+
+                                        <div class="col-xl-8 col-lg-8 col-md-9 col-12">
+
+                                            <div class="form-group">
+                                                <label class="form-label" for="field-1">{{ form_label(form.nomc,"Category Name") }}</label>
+                                                <span class="desc"></span>
+                                                <div class="controls">
+                                                    {{ form_widget(form.nomc,{ 'attr': {'class': 'form-control', 'placeholder': 'Enter the new category'} }) }}
+                                                    {% if form_errors(form.nomc) is not empty %}
+                                                    <div class="alert alert-danger">
+                                                     {{ form_errors(form.nomc) }}
+                                                    </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-8 col-lg-8 col-md-9 col-12 padding-bottom-30">
+                                            <div class="text-left">
+                                                 {{ form_widget(form.Add, { 'attr': {'class': 'btn btn-primary btn-lg btn-block'} }) }}
+                                            </div>
+                                        </div>
+                                    {{form_end(form)}}
+                                </div>
+                            </div>
+                    </section>
+                </div>
+
+
+        </section>
+    </section>
+
+<style>
+html, body {
+    height: 100%;
+}
+
+
+.form-holder {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 100vh;
+}
+
+.form-holder .form-content {
+    position: relative;
+    text-align: center;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    padding: 60px;
+}
+
+.form-content .form-items {
+    border: 3px solid #e16521;
+    padding: 40px;
+    display: inline-block;
+    width: 100%;
+    min-width: 540px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    text-align: left;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.form-content h3 {
+    color: black;
+    text-align: left;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.form-content h3.form-title {
+    margin-bottom: 30px;
+}
+
+.form-content p {
+    color: black;
+    text-align: left;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 20px;
+    margin-bottom: 30px;
+}
+
+
+.form-content label, .was-validated .form-check-input:invalid~.form-check-label, .was-validated .form-check-input:valid~.form-check-label{
+    color: black;
+}
+
+.form-content input[type=text], .form-content input[type=password], .form-content input[type=email], .form-content select {
+    width: 100%;
+    padding: 9px 20px;
+    text-align: left;
+    border: 0;
+    outline: 0;
+    border-radius: 6px;
+    background-color: #FBEEE6;
+    font-size: 15px;
+    font-weight: 300;
+    color: #8D8D8D;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    margin-top: 16px;
+}
+
+
+.btn-primary{
+    background:linear-gradient(to right,#EEA567, #e16521, #FFA14F); #2C2754;
+    outline: none;
+    border: 0px;
+     box-shadow: none;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active{
+    background: #2C2754;
+    outline: none !important;
+    border: none !important;
+     box-shadow: none;
+}
+
+.form-content textarea {
+    position: static !important;
+    width: 100%;
+    padding: 8px 20px;
+    border-radius: 6px;
+    text-align: left;
+    background-color: #fff;
+    border: 0;
+    font-size: 15px;
+    font-weight: 300;
+    color: black;
+    outline: none;
+    resize: none;
+    height: 120px;
+    -webkit-transition: none;
+    transition: none;
+    margin-bottom: 14px;
+}
+
+.form-content textarea:hover, .form-content textarea:focus {
+    border: 0;
+    background-color: #ebeff8;
+    color: #8D8D8D;
+}
+
+.invalid-feedback{
+    color: #ff606e;
+}
+
+.valid-feedback{
+   color: #2acc80;
+}
+
+</style>
+
+{% endblock %}

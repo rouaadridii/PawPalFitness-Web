@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reservations PDF</title>
+    <style>
+        /* Add CSS styles for the PDF */
+    </style>
+</head>
+<body>
+    <h1>All Reservations</h1>
+
+    {% for date, reservations in reservationsByDate %}
+        <h2>Date: {{ date }}</h2>
+        <table border="1" cellspacing="0" cellpadding="5">
+            <tr>
+                <th>ID</th>
+                <th>Places</th>
+                <th>Category</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Status</th>
+                <th>Duration</th>
+                <th>Pricing</th>
+            </tr>
+            {% for reservation in reservations %}
+                <tr>
+                    <td>{{ reservation.reservationID }}</td>
+                    <td>{{ reservation.places }}</td>
+                    <td>{{ reservation.category }}</td>
+                    <td>{{ reservation.startTime }}</td>
+                    <td>{{ reservation.endTime }}</td>
+                    <td>{{ reservation.status }}</td>
+                    <td>{{ reservation.duration }}</td>
+                    <td>{{ reservation.pricing }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endfor %}
+</body>
+</html>

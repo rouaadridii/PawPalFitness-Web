@@ -1,0 +1,103 @@
+{% extends 'baseback.html.twig' %}
+
+{% block body %}
+</style>
+<section id="main-content" class=" ">
+        <section class="wrapper main-wrapper" style=''>
+            <div class='col-xl-12 col-lg-12 col-md-12 col-12'>
+    <h1>All Reservations</h1>
+
+    <!-- Container for the search input, table, and buttons -->
+    <div class="reservations-container">
+        <!-- Client-side search input -->
+        <input class="form-control bg-dark border-0 search-bar" type="search" placeholder="Search" id="searchKeyword">
+
+        <table id="reservationsTable" class="reservations-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Places</th>
+                    <th>Category</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Status</th>
+                    <th>Duration</th>
+                    <th>Pricing</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                {% if reservations is not empty %}
+                    {% for reservation in reservations %}
+                        <tr>
+                            <td>{{ reservation.reservationID }}</td>
+                            <td>{{ reservation.date }}</td>
+                            <td>{{ reservation.places }}</td>
+                            <td>{{ reservation.category }}</td>
+                            <td>{{ reservation.startTime }}</td>
+                            <td>{{ reservation.endTime }}</td>
+                            <td>{{ reservation.status }}</td>
+                            <td>{{ reservation.duration }}</td>
+                            <td>{{ reservation.pricing }}</td>
+                            <td>
+                                <a href="{{ path('app_edit', {'id': reservation.reservationID}) }}" class="btn btn-info">Edit</a>
+                                {{ include('reservation/delete_form.html.twig', {'reservation': reservation}) }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="10">No records found</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+           </section>
+    </section>
+
+        <!-- Generate PDF and View Category Stats buttons -->
+        <div class="text-center mt-3">
+            <button class="btn btn-primary" onclick="window.location.href='{{ path('generate_pdf') }}'">Generate PDF</button>
+            <button class="btn btn-secondary" id="viewStatsButton">View Category Stats</button>
+        </div>
+
+        <!-- Pagination controls -->
+        <div class="pagination text-center mt-3">
+            {{ knp_pagination_render(reservations) }}
+        </div>
+    </div>
+
+    <!-- Client-side dynamic search script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#searchKeyword").on("input", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle(
+                        $(this).find('td:nth-child(2)').text().toLowerCase().startsWith(value) ||
+                        $(this).find('td:nth-child(4)').text().toLowerCase().startsWith(value)
+                    );
+                });
+            });
+
+            // Event listener for the View Category Stats button
+            document.getElementById('viewStatsButton').addEventListener('click', function() {
+                openChartWindow();
+            });
+
+            // Function to open the chart window
+            window.openChartWindow = function() {
+                document.getElementById('chartWindow').style.display = 'block';
+                loadChartData(); // Load the chart data
+            };
+
+            // Function to close the chart window
+            window.closeChartWindow = function() {
+                document.getElementById('chartWindow').style.display = 'none';
+            };
+        });
+    </script>
+
+{% endblock %}

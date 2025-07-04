@@ -1,0 +1,102 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Abonnement index{% endblock %}
+
+{% block body %}
+<div class="container-fluid contact bg-light py-5">
+
+    <div class="container py-5">
+        <h1>Abonnement </h1>
+       
+        <p>Total Abonnements: {{ totalCount }}</p>
+        <div>
+            <h3>Abonnements by Salle:</h3>
+            <ul>
+                {% for count in countBySalle %}
+                    <li>{{ count.salleName }}: {{ count.count }}</li>
+                {% else %}
+                    <li>No data available.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+        <script>
+            const labels = [];
+            const counts = [];
+            {% for count in countBySalle %}
+                labels.push("{{ count.salleName }}");
+                counts.push({{ count.count }});
+            {% endfor %}
+
+            const barColors = [
+                "#b91d47",
+                "#00aba9",
+                "#2b5797",
+                "#e8c3b9",
+                "#1e7145"
+            ];
+
+            new Chart("myChart", {
+                type: "pie",
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        backgroundColor: barColors,
+                        data: counts
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: "Abonnements by Salle"
+                    }
+                }
+            });
+        </script>
+    <div class="d-flex">
+            <button id="btPrint" onclick="createPDF()" class="export-pdf-btn">
+                <i class="fas fa-file-pdf"></i> Export PDF
+            </button>
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Recherche avec durée" class="form-control"
+                id="search-input">
+        </div>
+        <table class="table" id="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th onclick="sortTable(1)">Duree_abonnement (tri)</th>
+                    <th>Prix_abonnement</th>
+                    <th>Date_deb_abonnement</th>
+                    <th>Date_fin_abonnement</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for abonnement in pagination %}
+                <tr>
+                    <td>{{ abonnement.id }}</td>
+                    <td>{{ abonnement.dureeAbonnement }}</td>
+                    <td>{{ abonnement.prixAbonnement }}</td>
+                    <td>{{ abonnement.dateDebAbonnement ? abonnement.dateDebAbonnement|date('Y-m-d') : '' }}</td>
+                    <td>{{ abonnement.dateFinAbonnement ? abonnement.dateFinAbonnement|date('Y-m-d') : '' }}</td>
+                    <td>
+                        <a href="{{ path('app_abonnement_show', {'id': abonnement.id}) }}" class="btn btn-primary">Show</a>
+                        <a href="{{ path('app_abonnement_edit', {'id': abonnement.id}) }}" class="btn btn-secondary">Edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">No records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {{ knp_pagination_render(pagination) }}
+
+        <a href="{{ path('app_abonnement_new') }}" class="btn btn-success">Create new</a>
+    </div>
+</div>
+{% endblock %}

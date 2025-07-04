@@ -1,0 +1,10 @@
+<form id="chat-form" action="{{ path('send_message') }}" method="post">
+    <input type="text" id="chat-message" name="prompt" placeholder="Type your message here...">
+    <button type="submit" id="send-button">Send</button>
+</form>
+<div id="chat-content">
+    <!-- Chat responses will be displayed here -->
+</div>
+
+<!-- Include your JavaScript file -->
+<script src="{{ asset('js/chat.js') }}"></script>

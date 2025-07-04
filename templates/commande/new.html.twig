@@ -1,0 +1,11 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}New Commande{% endblock %}
+
+{% block body %}
+    <h1 align="center">Passer Commande</h1>
+
+    {{ include('commande/_form.html.twig') }}
+
+    <a href="{{ path('products_index') }}">Retour</a>
+{% endblock %}

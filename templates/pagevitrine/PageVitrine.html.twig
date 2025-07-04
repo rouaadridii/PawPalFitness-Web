@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Activitar Template">
+    <meta name="keywords" content="Activitar, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} PAWPAL Fitness {% endblock %} </title>
+
+    {% block stylesheets %}
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/elegant-icons.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/nice-select.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/slicknav.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}" type="text/css">
+    {% endblock %}
+
+</head>
+
+<body>
+
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+    <header class="header-section">
+        <div class="container-fluid" >
+            <div class="logo" style="color:#377fa7;font-weight: bold;font-size: larger;">
+                    PAWPAL FITNESS
+            </div>
+            <div class="top-social">
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-youtube-play"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+            </div>
+            <div class="container">
+                <div class="nav-menu">
+                    <nav class="mainmenu mobile-menu">
+                        <ul>
+                            <li class="active"><a href="#">Home</a></li>
+                            <li><a href="">Gyms</a></li>
+                            <li><a href="">Trainers</a></li>
+                            <li><a href="">Products</a></li>
+
+                            <li><a href="{{ path('planning') }}">Planning</a></li>
+
+                            <li><a href="{{ path('app_aboutus') }}">About us</a>
+                                <ul class="dropdown">
+                                    <li><a href="{{ path('app_aboutus') }}">About Us</a></li>
+                                    <li><a href="{{ path('app_team') }}">Our Team</a></li>
+                                </ul>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+     <!-- Hero Section Begin -->
+    <section class="hero-section">
+        <div class="hero-items owl-carousel">
+            <div class="single-hero-item set-bg" data-setbg="{{asset('img/mainimg.png')}}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="hero-text">
+                                <h2 style="color:#011936;">Join Us Now</h2>
+                                <h1 style="color:#011936;">For you and your PawPaL</h1>
+                                <a href="/signupp" class="primary-btn">Sign UP</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-hero-item set-bg" data-setbg="{{asset('img/fitness&sport.jpg')}}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="hero-text">
+                                <h2>Join Us Now</h2>
+                                <h1>FITNESS & SPORT</h1>
+                                <a href="/signupp" class="primary-btn">Sign UP</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-hero-item set-bg" data-setbg="{{asset('img/furfeather.jpg')}}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="hero-text">
+                                <h2>Join Us Now</h2>
+                                <h1>Fur & Feather Fitness Fiesta</h1>
+                                <a href="/signupp" class="primary-btn">Sign UP</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero End -->
+
+    <!-- Feature Section Begin -->
+    <section class="feature-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-item set-bg" data-setbg="{{asset('img/feature/feature-1.jpg')}}">
+                        <h3>Gym Subscriptions</h3>
+                        <p>Reduce the risk of chronic diseases and boost overall lifespan<br />Get fit. Get strong. Get started today!</p>
+                        <a href="#" class="primary-btn f-btn">More</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-item set-bg" data-setbg="{{asset('img/Trainning.png')}}">
+                        <h3>TRAINING</h3>
+                        <p>Paws and Push-Ups: Connecting champions<br /> whether two-legged or four!</p>
+                        <a href="#" class="primary-btn f-btn">More</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-item set-bg" data-setbg="{{asset('img/feature/feature-3.jpg')}}">
+                        <h3>Sports Nutrition</h3>
+                        <p>Nutrition Made Simple: Unlock your body's potential <br /> with expert guidance tailored just for you.</p>
+                        <a href="#" class="primary-btn f-btn">More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Feature Section End -->
+
+    <!-- About Section Begin -->
+    <section class="home-about spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="about-text">
+                        <h2>WELCOME TO PAWPAL FITNESS</h2>
+                        <p class="short-details">Welcome to our fitness hub where boundaries blur between species, and wellness knows 
+                        no bounds.</p>
+                        <p class="long-details">From personalized training programs for you and your furry companions to expert 
+                        nutrition guidance tailored to your unique needs, we're here to ignite your journey towards a healthier, 
+                        happier life. Discover your perfect fit with diverse gym subscriptions, making fitness accessible 
+                        wherever you are.
+                        <br> Gym owners, join our platform to showcase your space!
+                        <br><strong style="color:#bf4d3b;">Let's sweat, smile, and thrive together!</strong></p>
+                        <a href="/login" class="primary-btn about-btn">Sign in</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-img">
+                        <img src="{{asset('img/logoppf.png')}}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Section End -->
+
+    <!-- Classes Section Begin -->
+    <section class="classes-section">
+        <div class="class-title set-bg" data-setbg="{{asset('img/classes-title-bg.jpg')}}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7 m-auto text-center">
+                        <div class="section-title pl-lg-4 pr-lg-4 pl-0 pr-0">
+                            <h2>Empower your path</h2>
+                            <p>Gym owners, showcase your space and attract dedicated members.
+                            <br>Users, find your ideal gym and embark on your transformative fitness journey.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="classes-item set-bg" data-setbg="{{asset('img/produit1.png')}}">
+                        <h4>Pack de Prise de masse musculaire<h4>
+                        <p>443.52 DT</p>
+                        <a href="#" class="primary-btn class-btn">Buy Now</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="classes-item set-bg" data-setbg="{{asset('img/produit2.png')}}">
+                        <h4>LIGHT DIGEST WHEY Protéine 500g</h4>
+                        <p>78.84 DT</p>
+                        <a href="#" class="primary-btn class-btn">Buy Now</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="classes-item set-bg" data-setbg="{{asset('img/produit3.png')}}">
+                        <h4>SERIOUS MASS 5443g , Chocolate</h4>
+                        <p>359.64 DT</p>
+                        <a href="#" class="primary-btn class-btn">Buy Now</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="classes-item set-bg" data-setbg="{{asset('img/produit4.png')}}">
+                        <h4>TRUE MASS 1200 4.73 kg , Vanilla</h4>
+                        <p>341.64 DT</p>
+                        <a href="#" class="primary-btn class-btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Classes Section End -->
+
+    
+
+    <!-- Choseus Section Begin -->
+    <section class="chooseus-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Why Us</h2>
+                        <p>Seamless access to a world of fitness possibilities. 
+                        From tailored gym subscriptions for humans and their furry friends to connecting with top trainers</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-sm-6">
+                    <div class="choose-item">
+                        <img src="{{asset('img/icons/chose-icon-2.png')}}" alt="">
+                        <h5>Different trainers</h5>
+                        <p>Each with their unique expertise and approach, tailored to meet your specific fitness goals and needs.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="choose-item">
+                        <img src="{{asset('img/icons/chose-icon-3.png')}}" alt="">
+                        <h5>Personalized sessions</h5>
+                        <p>Designed exclusively for you, ensuring every workout aligns perfectly with your individual goals and preferences.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="choose-item">
+                        <img src="{{asset('img/icons/chose-icon-5.png')}}" alt="">
+                        <h5>Gyms Previews</h5>
+                        <p>Get a sneak peek into top-notch gyms near you with our exclusive previews, allowing you to explore facilities
+                        , amenities, and atmosphere before committing.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="choose-item">
+                        <img src="{{asset('img/icons/chose-icon-6.png')}}" alt="">
+                        <h5>Focus on your health</h5>
+                        <p>Offering resources, support, and guidance every step of the way on your wellness journey.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Choseus Section End -->
+
+    <!-- Video Section Begin -->
+    <section class="video-section set-bg" data-setbg="{{asset('img/banniere.png')}}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="video-text">
+                        <h2>Your ideal web app</h2>
+                        <a href="https://www.youtube.com/watch?v=X_9VoqR5ojM" class="play-btn video-popup">
+                            <i class="fa fa-play"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Video Section End -->
+
+    
+
+    <!-- Cta Section Begin -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="cta-text">
+                        <h3>GeT Started Today</h3>
+                    </div>
+                    <a href="/signupp" class="primary-btn cta-btn">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Cta Section End -->
+
+    <!-- Map Section Begin -->
+    <div class="map">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d102100.32340099865!2d10.106872654114737!3d36.899076649949414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x12e2cb75abbb1733%3A0x557a99cdf6c13b7b!2s1%2C%20P%C3%B4le%20Technologique%2C%202%20Rue%20Andr%C3%A9%20Amp%C3%A8re%D8%8C%20Ariana%202083!3m2!1d36.8991051!2d10.1892737!5e0!3m2!1sfr!2stn!4v1711729919169!5m2!1sfr!2stn" height="590" style="border: 0" allowfullscreen=""></iframe>
+        <div class="map-contact-detalis">
+            <div class="map-contact-form">
+                <h5>Contact Us</h5>
+                <form action="#">
+                    <input type="text" placeholder="Name">
+                    <input type="text" class="phone" placeholder="Phone">
+                    <textarea placeholder="Message"></textarea>
+                    <button type="submit" class="site-btn">Submit Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Map Section End -->
+
+
+    <!-- Footer Section Begin -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="footer-logo-item">
+                        <div class="f-logo">
+                            <a href="#"><img src="{{asset('img/logoppf.png')}}" alt="logoppf" style="height:150px;"></a>
+                        </div>
+                        <p>Engaging in sports not only enhances physical and mental well-being in humans but also brings a lively zest to the lives of our animal companions.</p>
+                        <div class="social-links">
+                            <h6>Follow us</h6>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 offset-lg-1">
+                    <div class="footer-widget">
+                        <h5>About Us</h5>
+                        <div class="footer-blog">
+                            <a href="#" class="fb-item">
+                                <h6>our team</h6>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="footer-widget">
+                        <h5>Program</h5>
+                        <ul class="workout-program">
+                            <li><a href="#">Bodybuilding</a></li>
+                            <li><a href="#">Running</a></li>
+                            <li><a href="#">Streching</a></li>
+                            <li><a href="#">Weight Loss</a></li>
+                            <li><a href="#">Gym Fitness</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="footer-widget">
+                        <h5>Get Info</h5>
+                        <ul class="footer-info">
+                            <li>
+                                <i class="fa fa-phone"></i>
+                                <span>Phone:</span>
+                                (216) 71555555
+                            </li>
+                            <li>
+                                <i class="fa fa-envelope-o"></i>
+                                <span>Email:</span>
+                                PawPal@gmail.com
+                            </li>
+                            <li>
+                                <i class="fa fa-map-marker"></i>
+                                <span>Address</span>
+                                Technological Pole, 2 André Ampère Street, Ariana 2083, Tunisia
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-text">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="ct-inside">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by Fantastic five and inspired of <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    {% block javascripts %} 
+    <!-- Js Plugins -->
+    <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('js/mixitup.min.js')}}"></script>
+    <script src="{{asset('js/jquery.nice-select.min.js')}}"></script>
+    <script src="{{asset('js/jquery.slicknav.js')}}"></script>
+    <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('js/masonry.pkgd.min.js')}}"></script>
+    <script src="{{asset('js/main.js')}}"></script>
+    {% endblock %}
+</body>
+
+</html>

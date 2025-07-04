@@ -1,0 +1,123 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="hero-section">
+        <div class="hero-items owl-carousel">
+            <div class="single-hero-item set-bg" data-setbg="{{ asset('img/mainimg.png') }}">
+                <!-- Signup Form -->
+                <div class="signup-form">
+                    <h2>Sign Up</h2>
+                    {{ form_start(form, {'attr': {'class': 'custom-form', 'novalidate': 'novalidate'}}) }}
+
+                    <div class="row">
+                        <!-- Personne fields -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.personne.nom, 'Name') }}
+                                {{ form_widget(form.personne.nom, {'attr': {'class': 'form-control', 'placeholder': 'Name'}}) }}
+                                {% if form_errors(form.personne.nom) is not empty %}
+                                    <div class="alert alert-danger" style="padding: 5px 10px; font-size: 0.8rem;">
+                                        {{ form_errors(form.personne.nom) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.personne.prenom, 'First Name') }}
+                                {{ form_widget(form.personne.prenom, {'attr': {'class': 'form-control', 'placeholder': 'First Name'}}) }}
+                                {% if form_errors(form.personne.prenom) is not empty %}
+                                    <div class="alert alert-danger" style="padding: 5px 10px; font-size: 0.8rem;">
+                                        {{ form_errors(form.personne.prenom) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.personne.region, 'Region') }}
+                                {{ form_widget(form.personne.region, {'attr': {'class': 'form-control', 'placeholder': 'Region'}}) }}
+                                {% if form_errors(form.personne.region) is not empty %}
+                                    <div class="alert alert-danger" style="padding: 5px 10px; font-size: 0.8rem;">
+                                        {{ form_errors(form.personne.region) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.personne.email, 'Email') }}
+                                {{ form_widget(form.personne.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+                                {% if form_errors(form.personne.email) is not empty %}
+                                    <div class="alert alert-danger" style="padding: 5px 10px; font-size: 0.8rem;">
+                                        {{ form_errors(form.personne.email) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.personne.password, 'Password') }}
+                                {{ form_widget(form.personne.password, {'attr': {'class': 'form-control', 'placeholder': 'Password', 'type': 'password'}}) }}
+                                {% if form_errors(form.personne.password) is not empty %}
+                                    <div class="alert alert-danger" style="padding: 5px 10px; font-size: 0.8rem;">
+                                        {{ form_errors(form.personne.password) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.personne.age, 'Age') }}
+                                {{ form_widget(form.personne.age, {'attr': {'class': 'form-control', 'placeholder': 'Age'}}) }}
+                                {% if form_errors(form.personne.age) is not empty %}
+                                    <div class="alert alert-danger" style="padding: 5px 10px; font-size: 0.8rem;">
+                                        {{ form_errors(form.personne.age) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Travailleur fields -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.diplome, 'Diplome') }}
+                                {{ form_widget(form.diplome, {'attr': {'class': 'form-control', 'placeholder': 'Diplome'}}) }}
+                                {% if form_errors(form.diplome) is not empty %}
+                                    <div class="alert alert-danger" style="padding: 5px 10px; font-size: 0.8rem;">
+                                        {{ form_errors(form.diplome) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.experience, 'Experience') }}
+                                {{ form_widget(form.experience, {'attr': {'class': 'form-control', 'placeholder': 'Experience'}}) }}
+                                {% if form_errors(form.experience) is not empty %}
+                                    <div class="alert alert-danger" style="padding: 5px 10px; font-size: 0.8rem;">
+                                        {{ form_errors(form.experience) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.langue, 'Langue') }}
+                                {{ form_widget(form.langue, {'attr': {'class': 'form-control', 'placeholder': 'Langue'}}) }}
+                                {% if form_errors(form.langue) is not empty %}
+                                    <div class="alert alert-danger" style="padding: 5px 10px; font-size: 0.8rem;">
+                                        {{ form_errors(form.langue) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.categorie, 'Categorie') }}
+                                {{ form_widget(form.categorie, {'attr': {'class': 'form-control', 'placeholder': 'Categorie'}}) }}
+                                {% if form_errors(form.categorie) is not empty %}
+                                    <div class="alert alert-danger" style="padding: 5px 10px; font-size: 0.8rem;">
+                                        {{ form_errors(form.categorie) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                    {{ form_end(form) }}
+
+                    <!-- Already have an account link -->
+                    <div class="already-account">
+                        <p>Already have an account? <a href="{{ path('app_login') }}">Log in here</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

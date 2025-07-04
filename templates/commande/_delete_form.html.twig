@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('commande_delete', {'idc': commande.idc}) }}" onsubmit="return confirm('confirmer commande');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ commande.idc) }}">
+    <button class="btn btn-danger">Annuler</button>
+
+</form>

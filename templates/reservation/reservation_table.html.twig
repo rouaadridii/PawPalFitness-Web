@@ -1,0 +1,41 @@
+<table id="reservationsTable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Places</th>
+            <th>Category</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Status</th>
+            <th>Duration</th>
+            <th>Pricing</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if reservations is not empty %}
+            {% for reservation in reservations %}
+                <tr>
+                    <td>{{ reservation.reservationID }}</td>
+                    <td>{{ reservation.date }}</td>
+                    <td>{{ reservation.places }}</td>
+                    <td>{{ reservation.category }}</td>
+                    <td>{{ reservation.startTime }}</td>
+                    <td>{{ reservation.endTime }}</td>
+                    <td>{{ reservation.status }}</td>
+                    <td>{{ reservation.duration }}</td>
+                    <td>{{ reservation.pricing }}</td>
+                    <td>
+                        <a href="{{ path('app_edit', {'id': reservation.reservationID}) }}" class="btn btn-info">Edit</a>
+                        {{ include('reservation/delete_form.html.twig', {'reservation': reservation}) }}
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="10">No records found</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>

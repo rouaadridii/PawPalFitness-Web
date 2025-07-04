@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block body %}
+<br></br>
+<br></br>
+<section class="cart-section">
+    <div class="container">
+        <hr></hr>
+        <div class="text-center mb-5">
+            <h1 style="font-size: 36px; font-weight: bold; color: #333;">Cart</h1> <!-- Centered and styled title "Cart" -->
+        </div>
+        {% if reservationsInCart is empty %}
+            <p>Your cart is empty.</p>
+        {% else %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Reservation</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in reservationsInCart %}
+                        <tr>
+                            <td>{{ item.reservation.date }}</td> <!-- Display reservation date -->
+                            <td>{{ item.quantity }}</td>
+                            <td>
+                                <!-- Add actions for the cart, e.g., remove item, update quantity, etc. -->
+                                <form action="{{ path('remove_from_cart', {'id': item.reservation.reservationID}) }}" method="post" style="display: inline;">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('remove_from_cart' ~ item.reservation.reservationID) }}">
+                                    <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <!-- Add a button to proceed to checkout -->
+            <div class="text-right mt-4">
+                <a  class="btn btn-success">Proceed to Checkout</a>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

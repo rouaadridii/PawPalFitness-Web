@@ -1,0 +1,187 @@
+{% extends 'baseBack1.html.twig' %}
+
+
+{% block title %}Products{% endblock %}
+
+{% block body %}
+<br>
+<br>
+<br>
+<div class="container-fluid contact bg-light py-5">
+ <div class="container py-5">
+    <h1>Products index</h1>
+    <style>
+        .statistics-section {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .statistics-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .statistics-info {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .statistics-total {
+            font-size: 18px;
+        }
+
+        .category-statistics {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .category-item {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .category-item span {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<body>
+    <div class="statistics-section">
+        <h2 class="statistics-title">Statistiques des Produits</h2>
+        <div class="statistics-info">
+            <p class="statistics-total">Nombre total de produits: <span>{{ pagination|length }}</span></p>
+            <div class="category-statistics">
+                <p class="category-item">Proteines: <span>{{ pagination|filter(pagination => pagination.categorie == 'proteines')|length }}</span></p>
+                <p class="category-item">Vitamines: <span>{{ pagination|filter(pagination => pagination.categorie == 'vitamines')|length }}</span></p>
+                <p class="category-item">Materiels: <span>{{ pagination|filter(pagination => pagination.categorie == 'materiels')|length }}</span></p>
+            </div>
+            
+            <!-- Place the chart canvas here -->
+            <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script>
+        var xValues = ["Proteines", "Vitamines", "Materiels"]; // Categories
+        var yValues = [
+            {{ pagination|filter(pagination => pagination.categorie == 'proteines')|length }},
+            {{ pagination|filter(pagination => pagination.categorie == 'vitamines')|length }},
+            {{ pagination|filter(pagination => pagination.categorie == 'materiels')|length }}
+        ]; // Counts for each category
+        var barColors = ["red", "green", "blue"]; // Color for each category
+    
+        new Chart("myChart", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Product Category Statistics"
+                }
+            }
+        });
+    </script>
+    
+     <div class="d-flex">
+            <button id="btPrint" onclick="createPDF()" class="export-pdf-btn">
+                <i class="fas fa-file-pdf"></i> Export PDF
+            </button>
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search ..." class="form-control"
+                id="search-input">
+        </div>
+        
+    <table class="table" id="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+         
+                <th onclick="sortTable(1)">Title (Tri)</th>
+                <th>Image</th>
+                <th>Categorie</th>
+                <th>Prix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in pagination %}
+            <tr>
+                <td>{{ product.id }}</td> 
+          
+                <td>{{ product.title }}</td>
+                <td><img src="{{ asset('uploads/') ~ product.image }}" alt="Image de {{ product.title }}" alt="Classe image" width="100">
+</td>
+                <td>{{ product.categorie }}</td>
+                <td>{{ product.prix }}</td>
+                <td>
+                    <a href="{{ path('app_products_back_show', {'id': product.id}) }}">show</a>
+                    <a href="{{ path('app_products_back_edit', {'id': product.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_products_back_new') }}">Create new</a>
+    </div>
+    <div class="pagination">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Retrieve the data from the HTML
+        var proteinsCount = parseInt(document.querySelector('.category-item:nth-child(1) span').textContent);
+        var vitaminsCount = parseInt(document.querySelector('.category-item:nth-child(2) span').textContent);
+        var materialsCount = parseInt(document.querySelector('.category-item:nth-child(3) span').textContent);
+    
+        // Create a bar chart
+        var ctx = document.getElementById('productChart').getContext('2d');
+        var productChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Proteines', 'Vitamines', 'Materiels'],
+                datasets: [{
+                    label: 'Number of Products',
+                    data: [proteinsCount, vitaminsCount, materialsCount],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)', // Red
+                        'rgba(54, 162, 235, 0.5)', // Blue
+                        'rgba(255, 206, 86, 0.5)', // Yellow
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+    
+{% endblock %}

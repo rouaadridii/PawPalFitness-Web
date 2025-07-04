@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Activitar Template">
+    <meta name="keywords" content="Activitar, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} PAWPAL Fitness {% endblock %} </title>
+
+    {% block stylesheets %}
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/elegant-icons.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/nice-select.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/slicknav.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}" type="text/css">
+    {% endblock %}
+
+    <style>
+        body {
+            margin-top: 90px; /* Adjust the margin to ensure content is below the header */
+            margin-bottom: 80px; /* Adjust the margin to ensure content is above the footer */
+        }
+
+        h1 {
+            font-size: 24px; /* Adjust the font size of the h1 */
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+    <header class="header-section" style="background-color: #151515;height:90px;">
+        <div class="container-fluid">
+            <div class="logo">
+               <a href="/profile/{{ user.id }}">
+    <img src="{{ asset('img/logoppf.png') }}" alt="PPF" style="height: 50px;">
+</a>
+
+            </div>
+            <div class="top-social">
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-youtube-play"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+            </div>
+            <div class="container">
+                <div class="nav-menu">
+                    <nav class="mainmenu mobile-menu">
+                        <ul>
+                 <li><a href="/profile/{{ user.id }}">Home</a></li>
+                            <li><a href="">Gyms</a></li>
+                            <li><a href="">Trainers</a></li>
+                            <li><a href="">Animals</a></li>
+                            <li><a href="">Products</a></li>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+   <!-- Update Profile Section -->
+<div class="container mt-5">
+    <h1>Update Profile</h1>
+    <hr>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Update Information</h5>
+                    <form method="post" action="{{ path('app_update_profile', {'id': user.id}) }}" novalidate>
+                        {% if errors is not empty %}
+                            <div class="alert alert-danger">
+                                {% for error in errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <div class="form-group">
+                            <label for="nom">Nom:</label>
+                            <input type="text" class="form-control" id="nom" name="nom" value="{{ user.nom }}">
+                            {% if errors is defined and errors['nom'] is defined %}
+                                <span class="text-danger">{{ errors['nom'] }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="prenom">Prenom:</label>
+                            <input type="text" class="form-control" id="prenom" name="prenom" value="{{ user.prenom }}">
+                            {% if errors is defined and errors['prenom'] is defined %}
+                                <span class="text-danger">{{ errors['prenom'] }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}">
+                            {% if errors is defined and errors['email'] is defined %}
+                                <span class="text-danger">{{ errors['email'] }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="region">Region:</label>
+                            <input type="text" class="form-control" id="region" name="region" value="{{ user.region }}">
+                            {% if errors is defined and errors['region'] is defined %}
+                                <span class="text-danger">{{ errors['region'] }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age:</label>
+                            <input type="number" class="form-control" id="age" name="age" value="{{ user.age }}">
+                            {% if errors is defined and errors['age'] is defined %}
+                                <span class="text-danger">{{ errors['age'] }}</span>
+                            {% endif %}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Footer Section Begin -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="footer-logo-item">
+                        <div class="f-logo">
+                            <a href="#"><img src="{{asset('img/logoppf.png')}}" alt="logoppf" style="height:150px;"></a>
+                        </div>
+                        <p>Engaging in sports not only enhances physical and mental well-being in humans but also brings a lively zest to the lives of our animal companions.</p>
+                        <div class="social-links">
+                            <h6>Follow us</h6>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 offset-lg-1">
+                    <div class="footer-widget">
+                        <h5>About Us</h5>
+                        <div class="footer-blog">
+                            <a href="#" class="fb-item">
+                                <h6>our team</h6>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="footer-widget">
+                        <h5>Program</h5>
+                        <ul class="workout-program">
+                            <li><a href="#">Bodybuilding</a></li>
+                            <li><a href="#">Running</a></li>
+                            <li><a href="#">Streching</a></li>
+                            <li><a href="#">Weight Loss</a></li>
+                            <li><a href="#">Gym Fitness</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="footer-widget">
+                        <h5>Get Info</h5>
+                        <ul class="footer-info">
+                            <li>
+                                <i class="fa fa-phone"></i>
+                                <span>Phone:</span>
+                                (216) 71555555
+                            </li>
+                            <li>
+                                <i class="fa fa-envelope-o"></i>
+                                <span>Email:</span>
+                                PawPal@gmail.com
+                            </li>
+                            <li>
+                                <i class="fa fa-map-marker"></i>
+                                <span>Address</span>
+                                Technological Pole, 2 André Ampère Street, Ariana 2083, Tunisia
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-text">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="ct-inside">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by Fantastic five and inspired of <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    {% block javascripts %} 
+    <!-- Js Plugins -->
+    <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('js/mixitup.min.js')}}"></script>
+    <script src="{{asset('js/jquery.nice-select.min.js')}}"></script>
+    <script src="{{asset('js/jquery.slicknav.js')}}"></script>
+    <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('js/masonry.pkgd.min.js')}}"></script>
+    <script src="{{asset('js/main.js')}}"></script>
+    {% endblock %}
+</body>
+
+</html>
