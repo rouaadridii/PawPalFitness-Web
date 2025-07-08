@@ -1,6 +1,6 @@
- PawPal Fitness — Web App 
+# PawPal Fitness — Web App 
 
-**PawPal Fitness** is an online gym membership platform built with Symfony, tailored for pet owners who want to stay fit alongside their furry companions.
+PawPal Fitness is an online gym membership platform built with Symfony, tailored for pet owners who want to stay fit alongside their furry companions.
 
 --> Key Features
 - User registration & login
